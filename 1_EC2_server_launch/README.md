@@ -5,4 +5,5 @@ We will launch EC2 server here. We will generate public key(.pub extension) and 
 
 # Process
 ![Alt text for the image](1_EC2_server_launch/ss1.png)
+![ss1](https://github.com/user-attachments/assets/0d438925-3eff-4281-b0d1-e3e26efc4f77)
 
