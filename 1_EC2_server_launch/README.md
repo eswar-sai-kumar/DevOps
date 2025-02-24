@@ -95,6 +95,32 @@ wget <url> == download the folder or software in linux
 
 curl <url> == get text present in url directly on to the terminal
 
+![image](https://github.com/user-attachments/assets/535ee616-b5ce-49e9-a5ee-987c7f85faae)
+
+cut command used to get fragments of a text using delimiter
+
+Ex : Eswar Sai Kumar = Eswar, Sai, Kumar (Here space is delimiter)
+
+syntax : cut -d "delimiter" -f1   (f1 represents first fragment)
+
+echo Hello == Hello
+
+
+![image](https://github.com/user-attachments/assets/7751dd67-f8c3-4a94-b762-d740fdb8e691)
+
+awk command used for text processing 
+
+awk is generally used to divide text in column format
+
+cat /etc/passwd == displays user account information
+
+cat /etc/passwd | awk -F ":" '{print $1F}'  == get all the names of the users
+
+![image](https://github.com/user-attachments/assets/533fa3ba-83a7-4f25-be77-f958de33836f)
+
+cat /etc/passwd | awk -F ":" '{print $NF}'  == get the last fragement of every user account information
+
+
 ![image](https://github.com/user-attachments/assets/2294b4e9-ade1-44f5-a197-f2584c844a09)
 
 head file_name == gives first 10 lines of the file
@@ -105,7 +131,107 @@ head -n 2 file_name == gives first 2 lines of the file
 
 tail -n 2 file_name == gives last 2 lines of the file
 
+![WhatsApp Image 2025-02-24 at 08 34 07_5f2f0022](https://github.com/user-attachments/assets/f8b18d64-63a5-4784-8baf-ea23ec7da5bb)
 
+Editor in Linux : we can edit the file here.
+
+Three modes available 1. Esc mode  2. Colon/command mode  3. Insert mode
+
+![image](https://github.com/user-attachments/assets/936f3200-4de2-441e-83e2-989bbf212654)
+
+vim <file_name> == open the vim editor for given file
+
+![image](https://github.com/user-attachments/assets/e25b4b11-59b7-490a-b3e0-93c6f2b41b34)
+
+after entering the vim command
+
+![image](https://github.com/user-attachments/assets/143cd782-651c-48c9-aae3-b7f5bb71e763)
+
+If we want to insert something, have to type "i"
+
+:q == quit(come out of file)
+
+:q! == force quit, do not save the changes that we have done
+
+:wq == write and quit
+
+![image](https://github.com/user-attachments/assets/7494dc10-c286-4908-b460-e3669f8068e1)
+
+:set nu == we can see numbers 
+
+:set nonu == we do not see numbers
+
+![image](https://github.com/user-attachments/assets/0eedfe65-aa36-4c4a-a25a-dbfd2e89f210)
+
+**colon mode commands:** 
+
+:/word-to-find == searches word from top and highlights if word is there
+
+:?word-to-find == searches word from bottom and highlights if word is there
+
+:noh == no highlight
+
+:s/bin/BIN == replaces bin with BIN in the line where cursor is
+
+:%s/bin/BIN == replaces every line 'bin' with 'BIN' but only first occurence
+
+:%s/bin/BIN/g == replaces every line 'bin' with 'BIN'  
+
+:10s/bin/BIN == replaces 10th line 'bin' with 'BIN' but only first occurence
+
+:10s/bin/BIN/g == replaces 10th line 'bin' with 'BIN' every occurence
+
+:%d  == deletes everything in the file
+
+**Escape mode commands:**
+
+u == undo
+
+yy == copy
+
+p == paste
+
+10p == 10 times paste
+
+dd == cut
+
+shift+g == go to bottom
+
+gg == go to top
+
+![image](https://github.com/user-attachments/assets/d1a1d7e0-e94c-46ee-8bd1-abe5bc767096)
+
+![image](https://github.com/user-attachments/assets/a3f00ece-81c0-4c04-a603-27f764a210bb)
+
+![image](https://github.com/user-attachments/assets/8918ff41-1e05-414e-820d-da975c10fa44)
+
+view <file_name> == view only,cant edit the file, can use all commands present in esc mode and colon mode
+
+![image](https://github.com/user-attachments/assets/e1ee732d-4e5e-4ca6-a04d-7f2f5328dc38)
+
+Read(r) == 4
+
+Write(w) == 2
+
+Execute(x) == 1
+
+chmod command used to change permissions of the file
+
+Imagine if the file permissions are like this  
+
+- rw- rw- r--  ==  first rw(read write) is for user(u), 2nd rw is for group(g),r is for others(o)
+
+chmod o+x file1 == gives execute permissions for others to file1
+
+chmod g+x file2 == gives execute permissions for group to file2
+
+chmod u+x file3 == gives execute permissions for user to file3
+
+chmod g-x file2 == removes execute permission for group to file2
+
+chmod ugo+rwx file4 == gives all permissions for user,group,others to file4
+
+chmod 765 file1 ==  7 means rwx(4+2+1) for user , 6 means rw(4+2) for group, 5 means rx(4+1) for others
 
 
 
