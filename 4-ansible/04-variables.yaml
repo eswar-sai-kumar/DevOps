@@ -49,7 +49,7 @@
   tasks:
     - name: printing variables by prompt
       ansible.builtin.debug:
-        msg: "Username is {{USERNAME}, Password is {{Password}}}"
+        msg: "Username is {{USERNAME}}, Password is {{Password}}"
 
 
 
@@ -67,7 +67,7 @@
   tasks:
     - name: printing info from variables by arguments
       ansible.builtin.debug:
-        msg: "{Variable1 is {var1},Variable2 is {{var2}}}"
+        msg: "Variable1 is {{var1}},Variable2 is {{var2}}"
 
 
 
