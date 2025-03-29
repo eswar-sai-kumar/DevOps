@@ -21,7 +21,7 @@
         my_name: "sai"
         college: "gvp"
       ansible.builtin.debug:
-        msg: "I am {{my_name} and I studied in {{college}}"
+        msg: "I am {{my_name}} and I studied in {{college}}"
 # we given variables in above and task also, but it only take from task only
 
 
