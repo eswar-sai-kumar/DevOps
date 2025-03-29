@@ -29,7 +29,7 @@
 - name: variables from files
   hosts: localhost
   vars_files:
-  - vars.yaml
+    - vars.yaml
   tasks:
     - name: print info from files
       ansible.builtin.debug:
