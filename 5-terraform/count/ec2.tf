@@ -1,15 +1,12 @@
-# resource <resource-type> <resource-name>
-resource "aws_instance" "db" {
-    #count = 3
+resource "aws_instance" "db"{
     count = length(var.instance_names)
-    ami = "ami-090252cbe067a9e58"
+    ami = "ami-09c813fb71547fc4f"
     instance_type = "t3.micro"
     vpc_security_group_ids = [aws_security_group.allow_ssh.id]
     tags = {
         Name = var.instance_names[count.index]
     }
 }
-
 resource "aws_security_group" "allow_ssh" {
     name = "allow_ssh"
     description = "allowing SSH access"
