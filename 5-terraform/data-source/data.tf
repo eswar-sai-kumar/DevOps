@@ -1,7 +1,8 @@
-data "aws_ami" "ami_id" {
+# It uses to fetch/read information from an existing resource
+data "aws_ami" "ami_id" {    
     most_recent = true
     owners = ["973714476881"]
-
+# It will use filter for fetching information 
     filter {
         name   = "name"
         values = ["RHEL-9-DevOps-Practice"]
