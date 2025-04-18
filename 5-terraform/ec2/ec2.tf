@@ -1,4 +1,4 @@
-# resource <resource-type> <resource-name>
+# resource "<resource-type>" "<resource-name>"
 resource "aws_instance" "db" {
 
     ami = "ami-090252cbe067a9e58"
