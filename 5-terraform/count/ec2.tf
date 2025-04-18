@@ -1,10 +1,10 @@
 resource "aws_instance" "db"{
-    count = length(var.instance_names)
+    count = length(var.instance_names)  # calculates length i.e 3
     ami = "ami-09c813fb71547fc4f"
     instance_type = "t3.micro"
     vpc_security_group_ids = [aws_security_group.allow_ssh.id]
     tags = {
-        Name = var.instance_names[count.index]
+        Name = var.instance_names[count.index]  # it will iterates till the end of length of instance names(3) and create instances of names "db", "backend", "frontend"
     }
 }
 resource "aws_security_group" "allow_ssh" {
