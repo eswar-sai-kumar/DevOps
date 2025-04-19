@@ -4,7 +4,7 @@ resource "aws_security_group" "allow_ports" {
 
     #terraform block
     dynamic "ingress" {
-        for_each = var.inbound_rules
+        for_each = var.inbound_rules # iterates using for_each
         content{
             from_port        = ingress.value["port"] #each.value[<key-name>]
             to_port          = ingress.value["port"]
