@@ -23,7 +23,7 @@ sudo dnf install git -y
 
 #### How ro run ansible file ? 
 ```
-ansible playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 example.yaml
+ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 example.yaml
 ```
 
 1. 01-ping.yaml
