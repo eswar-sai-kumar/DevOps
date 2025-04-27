@@ -37,16 +37,16 @@ ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=D
 ```
 
 ## 01-ping.yaml
-   ```
+```
 - name: pinging the server 
   hosts: web
   tasks:
   - name: pinging the server
     ansible.builtin.ping:
-   ```
+```
 
 ## 02-nginx.yaml
-   ```
+```
 - name: install and run nginx
   hosts: web
   become: yes # equal to -b in adhoc commands, getting root access
@@ -60,7 +60,7 @@ ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=D
       name: nginx
       state: started
       enabled: yes
-   ```
+```
 
 ## 03-multi-play.yaml
 ```
