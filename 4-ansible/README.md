@@ -36,11 +36,45 @@ cd DevOps/4-ansible
 ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 example.yaml
 ```
 
-1. 01-ping.yaml
+## 01-ping.yaml
    ```
-   - name: pinging the server
-     hosts: web
-     tasks:
-       - name: pinging the server
-         ansible.builtin.ping:
+- name: pinging the server 
+  hosts: web
+  tasks:
+  - name: pinging the server
+    ansible.builtin.ping:
    ```
+
+## 02-nginx.yaml
+   ```
+- name: install and run nginx
+  hosts: web
+  become: yes # equal to -b in adhoc commands, getting root access
+  tasks:
+  - name: install nginx
+    ansible.builtin.dnf:
+      name: nginx
+      state: latest
+  - name: start nginx
+    ansible.builtin.service:
+      name: nginx
+      state: started
+      enabled: yes
+   ```
+
+## 03-multi-play.yaml
+```
+- name: PLAY-1
+  hosts: localhost
+  tasks:
+  - name: PLAY-1 and TASK-1
+    ansible.builtin.debug:
+      msg: "Hello I am from PLAY-1 and TASK-1"
+
+- name: PLAY-2
+  hosts: localhost
+  tasks:
+  - name: PLAY-2 and TASK-1
+    ansible.builtin.debug:
+      msg: "Hello I am from PLAY-2 and TASK-1"
+```
