@@ -14,3 +14,10 @@
     #  name: sai from tasklevel
     ansible.builtin.debug:
       msg: "{{name}}"
+# 1. arguments
+# 2. Task level
+# 3. variable files
+# 4. Prompt
+# 5. Play level
+# 6. inventory
+# 7. role level
