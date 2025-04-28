@@ -53,6 +53,11 @@ ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=D
   - name: pinging the server
     ansible.builtin.ping:
 ```
+```
+ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 01-ping.yaml
+```
+![image](https://github.com/user-attachments/assets/9a5e688f-0a6a-4d6f-b7cc-1df04a54cf31)
+
 
 ## 02-nginx.yaml
 ```
