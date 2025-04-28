@@ -1,0 +1,58 @@
+- name: default value
+  hosts: localhost
+  tasks:
+  - name: print info
+    ansible.builtin.debug:
+      msg: "Hello {{Course | default('ansible')}}"
+
+- name: upper case and lower case
+  hosts: localhost
+  vars:
+    greeting: "Hello good morning"
+    trainer: "siva"
+  tasks:
+  - name: print info
+    ansible.builtin.debug:
+      msg: "{{ greeting | upper}},{{ trainer | lower }}"
+
+- name: remove duplicates,min and max
+  hosts: localhost
+  vars:
+    numbers: [1,2,3,4,5,2,2,4]
+  tasks:
+  - name: remove duplicates
+    ansible.builtin.debug:
+      msg: "Removed duplicates {{ numbers | unique }}"
+  - name: min and max
+    ansible.builtin.debug:
+      msg: "Min is{{numbers | min}},Max is {{numbers | max}}"
+
+- name: convert list/items to dict
+  hosts: localhost
+  vars:
+    my_list:
+    - {key: 'course',value: 'ansible'}
+    - {key: 'trainer',value: 'sivakumar'}
+    - {key: 'duration',value: '120 hrs'}
+  tasks:
+  - name: before convert
+    ansible.builtin.debug:
+      msg: "{{my_list}}"
+  - name: after converting 
+    ansible.builtin.debug:
+      msg: "{{my_list | items2dict}}"
+
+- name: convert dict to list/items 
+  hosts: localhost
+  vars:
+    my_dict:
+      course: 'ansible'
+      trainer: 'sivakumar'
+      duration: '120 hrs'
+  tasks:
+  - name: before convert
+    ansible.builtin.debug:
+      msg: "{{my_dict}}"
+  - name: after converting 
+    ansible.builtin.debug:
+      msg: "{{my_dict | dict2items}}"
