@@ -10,7 +10,7 @@
   - vars.yaml
   tasks:
   - name: check preference
-    vars:
-      name: sai from tasklevel
+    # vars:
+    #  name: sai from tasklevel
     ansible.builtin.debug:
       msg: "{{name}}"
