@@ -9,7 +9,6 @@
     ansible.builtin.debug:
       msg: "Given number {{number}} is less than 100"
     when: number | int < 100
-  tasks:
   - name: number is greater than 100
     ansible.builtin.debug:
       msg: "Given number {{number}} is greater than 100"
