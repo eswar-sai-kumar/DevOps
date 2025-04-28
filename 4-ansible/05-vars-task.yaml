@@ -1,0 +1,14 @@
+- name: variables
+  hosts: localhost
+  vars:
+    Course: DevOps
+    Trainer: Siva
+  tasks:
+  - name: print override information
+    vars: 
+      Course: Ansible
+    ansible.builtin.debug:
+      msg: "Course is {{Course}} and Trainer is {{Trainer}}"
+  - name: print information
+    ansible.builtin.debug:
+      msg: "Course is {{Course}} and Trainer is {{Trainer}}"
