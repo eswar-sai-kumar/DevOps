@@ -37,7 +37,7 @@ We can see instance was runnning. Copy the IP address.
 
 syntax: ssh -i <private-key> username@IP
 
-ssh -i daws.pem ec2-server@13.61.18.185
+ssh -i daws.pem ec2-user@13.61.18.185
 
 Now we will be on the Linux server
 
