@@ -1,74 +1,9 @@
 - name: variables
   hosts: localhost
   vars:
-    course: "Ansible"
-    trainer: "Siva"
+    Course: DevOps
+    Trainer: Siva
   tasks:
-    - name: print info
-      ansible.builtin.debug:
-        msg: "I am learning {{course}} from {{trainer}}"
-
-
-
-
-- name: variables from task
-  hosts: localhost
-  vars: 
-    name: "John"
-  tasks:
-    - name: print info by variables in task
-      vars:
-        my_name: "sai"
-        college: "gvp"
-      ansible.builtin.debug:
-        msg: "I am {{my_name}} and I studied in {{college}}"
-# we given variables in above and task also, but it only take from task only
-
-
-
-- name: variables from files
-  hosts: localhost
-  vars_files:
-    - vars.yaml
-  tasks:
-    - name: print info from files
-      ansible.builtin.debug:
-       msg: "variable came from {{file}}"
-
-
-
-- name: variables by prompt
-  hosts: localhost
-  vars_prompt:
-    - name: USERNAME
-      prompt: Enter your username
-      private: false
-    - name: Password
-      prompt: Enter the password
-      private: true
-  tasks:
-    - name: printing variables by prompt
-      ansible.builtin.debug:
-        msg: "Username is {{USERNAME}}, Password is {{Password}}"
-
-
-
-- name: variables from inventory
-  hosts: localhost
-  tasks:
-    - name: printing info from variables in inventory
-      ansible.builtin.debug:
-        msg: "Variable came from inventory {{variable}}"
-
-
-
-- name: variables from arguments
-  hosts: localhost
-  tasks:
-    - name: printing info from variables by arguments
-      ansible.builtin.debug:
-        msg: "Variable1 is {{var1}},Variable2 is {{var2}}"
-
-
-
-    
+  - name: print info
+    ansible.builtin.debug:
+      msg: "Course is {{Course}} and Trainer is {{Trainer}}"
