@@ -4,12 +4,21 @@
 ## How to run ansible through EC2 instances ?
 
 
-#### Create EC2 instance(proceed without key pairs, choose default security group) and copy public IP address and paste it in superputty
+#### Create EC2 instance(proceed without key pairs, choose allow-everything security group) and copy public IP address and paste it in superputty
 ![image](https://github.com/user-attachments/assets/e06f9098-4b25-4d27-bdbb-fa54d4a14fc6)
 
 
 #### Enter password "DevOps321" (AMI used in EC2 is RHEL-9-DevOps-Practice  AMI ID: ami-09c813fb71547fc4f)
 ![image](https://github.com/user-attachments/assets/dd25ffb4-dd85-4a5b-863c-0a3e2d33ff3f)
+
+#### If superputty not works properly use git bash, To use gitbash EC2 instance should have key pair
+![image](https://github.com/user-attachments/assets/e9d4f601-2fd9-4b57-982b-0a1ea187b9f1)
+
+```
+ssh -i daws.pem ec2-user@3.85.221.230
+```
+daws.pem is private key
+After running command, Enter password "DevOps321"
 
 #### Install Ansible
 ```
