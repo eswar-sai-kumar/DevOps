@@ -1,4 +1,3 @@
-
 # Ansible
 
 ## How to run ansible through EC2 instances ?
@@ -75,6 +74,11 @@ ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=D
       state: started
       enabled: yes
 ```
+```
+ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 02-nginx.yaml
+```
+![Screenshot 2025-04-28 082229](https://github.com/user-attachments/assets/c5b712ff-40a5-49c3-ae9f-86baaba077f4)
+
 
 ## 03-multi-play.yaml
 ```
@@ -92,3 +96,183 @@ ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=D
     ansible.builtin.debug:
       msg: "Hello I am from PLAY-2 and TASK-1"
 ```
+```
+ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 03-multi-play.yaml
+```
+![image](https://github.com/user-attachments/assets/20f1c1db-2bdf-4ed0-b5da-80841d45a879)
+
+
+## 04-variables.yaml
+```
+- name: variables
+  hosts: localhost
+  vars:
+    Course: DevOps
+    Trainer: Siva
+  tasks:
+  - name: print info
+    ansible.builtin.debug:
+      msg: "Course is {{Course}} and Trainer is {{Trainer}}"
+```
+```
+ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 04-variables.yaml
+```
+![Screenshot 2025-04-28 093048](https://github.com/user-attachments/assets/d858def6-5d16-4261-908c-279f55097d12)
+
+## 05-vars-task.yaml
+```
+- name: variables
+  hosts: localhost
+  vars:
+    Course: DevOps
+    Trainer: Siva
+  tasks:
+  - name: print override information
+    vars: 
+      Course: Ansible
+    ansible.builtin.debug:
+      msg: "Course is {{Course}} and Trainer is {{Trainer}}"
+  - name: print information
+    ansible.builtin.debug:
+      msg: "Course is {{Course}} and Trainer is {{Trainer}}"  
+```
+```
+ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 05-vars-task.yaml
+```
+![Screenshot 2025-04-28 093111](https://github.com/user-attachments/assets/e5a1c70c-ceda-4564-92a6-3f05a715fef2)
+
+## 06-vars-files.yaml
+```
+- name: variables from files
+  hosts: localhost
+  vars_files:
+  - vars.yaml
+  tasks:
+  - name: print info
+    ansible.builtin.debug:
+      msg: "Course is {{Course}} and Trainer is {{Trainer}}"
+```
+```
+ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 06-vars-files.yaml
+```
+![Screenshot 2025-04-28 093136](https://github.com/user-attachments/assets/fc056ab0-8ca1-4bbe-bec3-b711ea64dd43)
+
+## 07-vars-prompt.yaml
+```
+- name: variables from prompt
+  hosts: localhost
+  vars_prompt:
+  - name: Username
+    prompt: Enter your username
+    private: false
+  - name: Password
+    prompt: Enter your password
+    private: true
+  tasks:
+  - name: Login 
+    ansible.builtin.debug:
+     msg: "Username is {{Username}},Password is {{Password}}"
+```
+```
+ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 07-vars-prompt.yaml
+```
+![Screenshot 2025-04-28 093156](https://github.com/user-attachments/assets/8efb5c67-31e4-43cf-8a54-750b35db63fd)
+
+## 08-vars-inventory.yaml
+```
+- name: variables from inventory
+  hosts: localhost
+  tasks:
+  - name: print info
+    ansible.builtin.debug:
+      msg: "Course is {{Course}},Trainer is {{Trainer}},Duration is {{Duration}},Wishes is {{Wishes}}"
+```
+```
+ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 08-vars-inventory.yaml
+```
+![Screenshot 2025-04-28 093224](https://github.com/user-attachments/assets/f1608e74-8cde-44e0-82e3-7dba3c332e72)
+
+## 09-vars-args.yaml
+```
+- name: variables from arguments
+  hosts: localhost
+  tasks:
+  - name: print info
+    ansible.builtin.debug:
+      msg: "My name is {{name}}, I am from {{place}}"
+```
+```
+ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 09-vars-args.yaml -e name=sai -e place=amalapuram
+```
+![Screenshot 2025-04-28 093426](https://github.com/user-attachments/assets/cfde735a-e7ef-468c-9365-ba00f37d3540)
+
+## 10-vars-preference.yaml
+```
+- name: variable preference
+  hosts: localhost
+  # vars:
+  #  name : sai from playlevel
+  # vars_prompt:
+  # - name: name
+  #   prompt: enter your name
+  #   private: false
+  vars_files:
+  - vars.yaml
+  tasks:
+  - name: check preference
+    # vars:
+    #  name: sai from tasklevel
+    ansible.builtin.debug:
+      msg: "{{name}}"
+# 1. arguments
+# 2. Task level
+# 3. variable files
+# 4. Prompt
+# 5. Play level
+# 6. inventory
+# 7. role level
+```
+```
+ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 10-vars-preference.yaml -e name=sai_from_arguments
+```
+![Screenshot 2025-04-28 100105](https://github.com/user-attachments/assets/83edd50d-8024-4277-a34e-4420b0512318)
+
+```
+ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 10-vars-preference.yaml 
+```
+![Screenshot 2025-04-28 100230](https://github.com/user-attachments/assets/5a625e52-6f73-40ad-b289-cadfac3afea4)
+
+Comment down the task level variable
+
+```
+ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 10-vars-preference.yaml 
+```
+![Screenshot 2025-04-28 101119](https://github.com/user-attachments/assets/4b65c8b8-f842-4144-8eaa-07390d88a36a)
+
+Comment down the variable present in variable file
+
+```
+ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 10-vars-preference.yaml 
+```
+![Screenshot 2025-04-28 101214](https://github.com/user-attachments/assets/26d73c9d-d9a9-4dc9-acf9-ae00fe9a7c66)
+
+Comment down the vars_prompt
+
+```
+ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 10-vars-preference.yaml 
+```
+![Screenshot 2025-04-28 101336](https://github.com/user-attachments/assets/a243ece8-2123-40db-95ae-b3b2006bbcf2)
+
+Comment down the play level variable
+
+```
+ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 10-vars-preference.yaml 
+```
+![Screenshot 2025-04-28 101511](https://github.com/user-attachments/assets/64020377-cad1-4a87-bc7c-bfa5dbf2e131)
+
+Comment down the inventory variable
+
+
+
+
+
