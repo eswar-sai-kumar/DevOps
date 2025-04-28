@@ -1,4 +1,3 @@
-![Screenshot 2025-04-28 100105](https://github.com/user-attachments/assets/34e5dda3-7689-432a-a465-aab78c169e67)
 # Ansible
 
 ## How to run ansible through EC2 instances ?
