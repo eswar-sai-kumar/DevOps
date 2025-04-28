@@ -1,0 +1,16 @@
+- name: variable preference
+  hosts: localhost
+  vars:
+    name : sai from playlevel
+  vars_prompt:
+  - name: name
+    prompt: enter your name
+    private: false
+  vars_files:
+  - vars.yaml
+  tasks:
+  - name: check preference
+    vars:
+      name: sai from tasklevel
+    ansible.builtin.debug:
+      msg: "{{name}}"
