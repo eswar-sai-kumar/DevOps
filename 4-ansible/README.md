@@ -99,7 +99,7 @@ ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=D
 ```
 ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 03-multi-play.yaml
 ```
-![Screenshot 2025-04-28 082243](https://github.com/user-attachments/assets/8e442554-5669-488e-9d56-b028c13c37c7)
+![image](https://github.com/user-attachments/assets/20f1c1db-2bdf-4ed0-b5da-80841d45a879)
 
 
 ## 04-variables.yaml
