@@ -272,6 +272,140 @@ ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=D
 
 Comment down the inventory variable
 
+## 11-data-types.yaml
+```
+- name: datatypes
+  hosts: web
+  vars:
+    Course: DevOps with AWS
+    Tools: # list
+    - Linux
+    - Shell
+    - Ansible
+    Experience:
+      DevOps: 3
+      AWS: 2
+      Docker: 1
+    RealProject: True
+  tasks:
+  - name: print info
+    ansible.builtin.debug:
+      msg: "Course is {{Course}},Tools covered {{Tools}}, is RealProject is {{RealProject}}"
+```
+```
+ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 11-data-types.yaml 
+```
+![Screenshot 2025-04-28 145239](https://github.com/user-attachments/assets/3b61b5d5-f65b-4caf-86f2-244f3b32262c)
+
+## 12-conditions.yaml
+```
+- name: conditions
+  hosts: web
+  become: yes
+  tasks:
+  - name: check user exists or not
+    ansible.builtin.command: id expense
+    register: user
+    ignore_errors: true
+  - name: print user info
+    ansible.builtin.debug:
+      msg: "User info is {{user}}"
+  - name: create user
+    ansible.builtin.command: useradd expense
+    when: user.rc != 0  # condition (rc means return count)
+    # if user.rc == 0 (user expense already exists)
+    # if user.rc !=0 (user expense not exists)
+  - name: say hello
+    ansible.builtin.debug:
+      msg: "Hello"
+```
+```
+ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 12-conditions.yaml 
+```
+![Screenshot 2025-04-28 150344](https://github.com/user-attachments/assets/1649d565-57cd-45b7-9d16-ad9e3b0a350e)
+
+## 13-conditions.yaml
+```
+- name: check number 
+  hosts: localhost
+  vars_prompt:
+  - name: number
+    prompt: Enter the number
+    private: no
+  tasks:
+  - name: number is less than 100
+    ansible.builtin.debug:
+      msg: "Given number {{number}} is less than 100"
+    when: number | int < 100
+  - name: number is greater than 100
+    ansible.builtin.debug:
+      msg: "Given number {{number}} is greater than 100"
+    when: number | int > 100
+```
+```
+ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 13-conditions.yaml 
+```
+![Screenshot 2025-04-28 151045](https://github.com/user-attachments/assets/1c666779-5cce-4237-96bb-dad5f2157ebf)
+
+## 15-loops.yaml
+```
+- name: demo on loops
+  hosts: localhost
+  tasks:
+  - name: print names
+    ansible.builtin.debug:
+      msg: "Hello {{item}}"
+    loop:
+    - Linux
+    - Shell script
+    - Ansible
+```
+```
+ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 15-loops.yaml 
+```
+![Screenshot 2025-04-28 151627](https://github.com/user-attachments/assets/113e7f28-51bf-4776-9681-b2ae73097124)
+
+## 16-loops.yaml
+```
+- name: install packages
+  hosts: localhost
+  become: yes
+  tasks:
+  - name: install packages
+    ansible.builtin.dnf:
+      name: "{{item}}"
+      state: latest
+    loop:
+    - mysql
+    - nginx
+```
+```
+ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 16-loops.yaml 
+```
+![Screenshot 2025-04-28 152619](https://github.com/user-attachments/assets/44321428-3936-461e-9a06-93336198a660)
+
+## 17-loops.yaml
+```
+- name: install packages
+  hosts: web
+  become: yes
+  tasks:
+  - name: install packages
+    ansible.builtin.dnf:
+      name: "{{ item.name }}"
+      state: "{{ item.state }}"
+    loop:
+    - { name: 'mysql', state: 'latest'} # item
+    - { name: 'nginx', state: 'absent'}
+    - { name: 'postfix', state: 'absent'}
+```
+```
+ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 17-loops.yaml 
+```
+![Screenshot 2025-04-28 154207](https://github.com/user-attachments/assets/f71d9b89-0595-43ca-8451-725bc6469b9a)
+
+
+
 
 
 
