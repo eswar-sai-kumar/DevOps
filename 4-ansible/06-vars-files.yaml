@@ -3,5 +3,6 @@
   vars_files:
   - vars.yaml
   tasks:
+  - name: print info
     ansible.builtin.debug:
       msg: "Course is {{Course} and Trainer is {{Trainer}}}"
