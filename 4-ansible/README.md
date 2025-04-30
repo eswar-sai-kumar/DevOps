@@ -19,6 +19,13 @@ ssh -i daws.pem ec2-user@3.85.221.230
 daws.pem is private key
 After running command, Enter password "DevOps321"
 
+#### Paste private IP in inventory.ini
+## inventory.ini
+```
+[web]
+172.31.91.204
+```
+
 #### Install Ansible
 ```
 sudo dnf install ansible -y
@@ -38,8 +45,11 @@ git clone "https://github.com/eswar-sai-kumar/DevOps.git"
 ```
 cd DevOps/4-ansible
 ```
-
-#### Run ansible file ? 
+#### Don't forget to pull after pushing into github
+```
+git pull
+```
+#### Run ansible file 
 ```
 ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 example.yaml
 ```
