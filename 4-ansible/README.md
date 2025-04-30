@@ -19,6 +19,13 @@ ssh -i daws.pem ec2-user@3.85.221.230
 daws.pem is private key
 After running command, Enter password "DevOps321"
 
+#### Paste private IP in inventory.ini
+## inventory.ini
+```
+[web]
+172.31.91.204
+```
+
 #### Install Ansible
 ```
 sudo dnf install ansible -y
@@ -38,8 +45,11 @@ git clone "https://github.com/eswar-sai-kumar/DevOps.git"
 ```
 cd DevOps/4-ansible
 ```
-
-#### Run ansible file ? 
+#### Don't forget to pull after pushing into github
+```
+git pull
+```
+#### Run ansible file 
 ```
 ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 example.yaml
 ```
@@ -347,6 +357,77 @@ ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=D
 ```
 ![Screenshot 2025-04-28 151045](https://github.com/user-attachments/assets/1c666779-5cce-4237-96bb-dad5f2157ebf)
 
+## 14-filters.yaml
+```
+- name: default value
+  hosts: localhost
+  tasks:
+  - name: print info
+    ansible.builtin.debug:
+      msg: "Hello {{Course | default('ansible')}}"
+
+- name: upper case and lower case
+  hosts: localhost
+  vars:
+    greeting: "Hello good morning"
+    trainer: "siva"
+  tasks:
+  - name: print info
+    ansible.builtin.debug:
+      msg: "{{ greeting | upper}},{{ trainer | lower }}"
+
+- name: remove duplicates,min and max
+  hosts: localhost
+  vars:
+    numbers: [1,2,3,4,5,2,2,4]
+  tasks:
+  - name: remove duplicates
+    ansible.builtin.debug:
+      msg: "Removed duplicates {{ numbers | unique }}"
+  - name: min and max
+    ansible.builtin.debug:
+      msg: "Min is{{numbers | min}},Max is {{numbers | max}}"
+
+- name: convert list/items to dict
+  hosts: localhost
+  vars:
+    my_list:
+    - {key: 'course',value: 'ansible'}
+    - {key: 'trainer',value: 'sivakumar'}
+    - {key: 'duration',value: '120 hrs'}
+  tasks:
+  - name: before convert
+    ansible.builtin.debug:
+      msg: "{{my_list}}"
+  - name: after converting 
+    ansible.builtin.debug:
+      msg: "{{my_list | items2dict}}"
+
+- name: convert dict to list/items 
+  hosts: localhost
+  vars:
+    my_dict:
+      course: 'ansible'
+      trainer: 'sivakumar'
+      duration: '120 hrs'
+  tasks:
+  - name: before convert
+    ansible.builtin.debug:
+      msg: "{{my_dict}}"
+  - name: after converting 
+    ansible.builtin.debug:
+      msg: "{{my_dict | dict2items}}"
+```
+```
+ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 14-filters.yaml 
+```
+![Screenshot 2025-04-28 193320](https://github.com/user-attachments/assets/e542fa0b-de44-4fcb-a534-047ed96d2d3f)
+
+![Screenshot 2025-04-28 193352](https://github.com/user-attachments/assets/dd2a792c-febc-4af4-8446-030a986222f0)
+
+![Screenshot 2025-04-28 193407](https://github.com/user-attachments/assets/2d064e9a-7312-4690-9df2-733127393c86)
+
+
 ## 15-loops.yaml
 ```
 - name: demo on loops
@@ -403,6 +484,30 @@ ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=D
 ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 17-loops.yaml 
 ```
 ![Screenshot 2025-04-28 154207](https://github.com/user-attachments/assets/f71d9b89-0595-43ca-8451-725bc6469b9a)
+
+## 18-command-vs-shell.yaml
+```
+- name: command vs shell
+  hosts: localhost
+  tasks:
+  - name: command module
+    ansible.builtin.command: "echo 'Hi, this is from command module' > /tmp/command.txt "
+
+  - name: shell module
+    ansible.builtin.shell: "echo 'Hi, this is from shell module' > /tmp/shell.txt "
+
+    # simple commands without the need of shell variables, envrironment and features like redirections, pipes, & go for command module.
+    # If we need to run complex commands or scripts go for shell module.
+    # Whatever works in command module, it will work in shell module, but vice versa is not true.
+```
+```
+ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 18-command-vs-shell.yaml 
+```
+![Screenshot 2025-04-28 200204](https://github.com/user-attachments/assets/fd441cbc-d2f0-48c9-aa76-ac34d8dd9144)
+
+![Screenshot 2025-04-28 200225](https://github.com/user-attachments/assets/a46f78bc-0a19-471f-b78e-e593082ebb48)
+
+
 
 
 
