@@ -1,6 +1,10 @@
+resource "aws_key_pair" "docker-key-pair" {
+  key_name   = "docker-key-pair"
+  public_key = file("c:/repos/key-pair.pub")
+}
 module "docker" {
   source  = "terraform-aws-modules/ec2-instance/aws"
-
+  key_name = aws_key_pair.docker-key-pair.key_name
   name = "docker"
 
   instance_type          = "t3.micro"
