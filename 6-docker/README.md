@@ -26,9 +26,9 @@
 
 - **docker rmi <image_id>** → Deletes the image
 
-- **docker rmi `docker images -a -q`** → Delets all images
+- docker rmi `docker images -a -q` → Delets all images
 
-- **docker rmi `docker ps -a -q`** → Deletes all containers
+- docker rmi `docker ps -a -q` → Deletes all containers
 
 
 
