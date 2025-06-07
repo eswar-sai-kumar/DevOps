@@ -4,11 +4,11 @@
 
 - **docker images** → List down the docker images
 
-- **docker pull nginx:tag** → Pulls the specific version nginx image from Docker Hub to your local machine.
+- docker pull nginx:tag → Pulls the specific version nginx image from Docker Hub to your local machine.
 
 - **docker pull nginx** → Pulls the latest version nginx image from Docker Hub to your local machine.
 
-- **docker create image:tag** → Creates container (tag refers to version)
+- docker create image:tag → Creates container (tag refers to version)
 
 - **docker create nginx** → Create nginx container of latest version (no tag provided)
 
